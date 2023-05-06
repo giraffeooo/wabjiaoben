@@ -1,4 +1,4 @@
-'''提取img的anchor,输出到output文件夹
+'''提取img的anchor,输出到train/gallery文件夹
     命名格式为instanceID_d(1/0)_v(1/2/3/4)_n，instanceID=0代表没有此商品，类比market1501查无此人
     d:(1纯商品/0模特上身)
     v(1正/2背/3左/4右)
@@ -22,7 +22,7 @@ for filename in img_dir:
         anno_dir = os.path.join(annotation,filename,dir)
         with open(anno_dir, 'r', encoding='utf-8') as f:
             imgcrop = json.load(f)
-        a=0
+
         for n in imgcrop['annotations']:
             xmin,ymin,xmax,ymax = n['box']
             instanID = n['instance_id']
@@ -34,4 +34,3 @@ for filename in img_dir:
             img_split = img.split('_')[-1].split('.')[0]
             anchor_filename = 'D:\AI\output\gallery'+'\\' + str(instanID) + '_d'+ str(display) + '_v'+ str(viewpoint) + '_'+img_split+'.jpg'   # 表示这张图片第1个anchor
             box.save(anchor_filename)
-            a += 1

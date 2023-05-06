@@ -26,10 +26,12 @@ for filename in img_dir:
         for n in imgcrop['annotations']:
             xmin,ymin,xmax,ymax = n['box']
             instanID = n['instance_id']
+            if instanID==0:
+                instanID=-1
             display = n['display']
             viewpoint = n['viewpoint']
             box = img_open.crop((xmin,ymin,xmax,ymax))
             img_split = img.split('_')[-1].split('.')[0]
-            anchor_filename = 'D:\AI\output\image'+'\\' + str(instanID) + '_d'+ display + '_v'+ viewpoint + '_'+str(a+1)+'.jpg'   # 表示这张图片第1个anchor
+            anchor_filename = 'D:\AI\output\gallery'+'\\' + str(instanID) + '_d'+ str(display) + '_v'+ str(viewpoint) + '_'+img_split+'.jpg'   # 表示这张图片第1个anchor
             box.save(anchor_filename)
             a += 1
